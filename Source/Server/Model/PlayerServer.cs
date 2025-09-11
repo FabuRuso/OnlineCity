@@ -28,6 +28,8 @@ namespace ServerOnlineCity.Model
 
         public string Pass;
 
+        public string PasswordSalt;
+
         public bool IsAdmin { get => (Public.Grants & (Grants.SuperAdmin | Grants.Moderator)) > Grants.NoPermissions; }
 
         public bool Approve { get; set; }

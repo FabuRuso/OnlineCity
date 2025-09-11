@@ -3,6 +3,7 @@ using OCUnion;
 using ServerOnlineCity.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading;
 using Transfer;
 using Util;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ServerOnlineCity
 {
@@ -26,11 +28,22 @@ namespace ServerOnlineCity
         private Service Worker;
         private DateTime ServiceCheckTime;
 
+        private bool disposed;
+        public bool Disposed => disposed;
 
         public void Dispose()
         {
             IsActive = false;
+
+            //var context = GetContext();
+            //if (context != null && context.Player != null && !disposed)
+            //{
+            //    ServerManager.Database.Logout(context.Player.Public.Login);
+            //}
+
             Client.Dispose();
+
+            disposed = true;
         }
 
         public string GetNameWhoConnect()

@@ -82,14 +82,14 @@ namespace RimWorldOnlineCity
 			{
 				for (int k = 0; k < affectedMaps.Count; k++)
 				{
-					overlays[j].TickOverlay(affectedMaps[k]);
+					overlays[j].TickOverlay(affectedMaps[k], 1f);
 				}
 			}
 		}
 
 		private void DoPawnsToxicDamage(Map map)
 		{
-			List<Pawn> allPawnsSpawned = map.mapPawns.AllPawnsSpawned;
+			IReadOnlyList<Pawn> allPawnsSpawned = map.mapPawns.AllPawnsSpawned;
 			for (int i = 0; i < allPawnsSpawned.Count; i++)
 			{
 				DoPawnToxicDamage(allPawnsSpawned[i]);

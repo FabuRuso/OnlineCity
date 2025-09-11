@@ -20,11 +20,17 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using System.ComponentModel.DataAnnotations;
+using Npgsql;
+using Server;
+using Model;
 
 namespace ServerOnlineCity
 {
     public class ServerManager
     {
+        //private static Database database;
+        //public static Database Database => database;
+
         public int MaxActiveClientCount = 10000;
         public static ServerSettings ServerSettings = new ServerSettings();
 
@@ -62,7 +68,8 @@ namespace ServerOnlineCity
   L - command to save players for shutdown (EverybodyLogoff)
   S - save player statistics file
   D - save debug info file
-  С - run command from file command.txt";
+  С - run command from file command.txt
+  Y - show current sessions";
 
         public static bool SendConsoleCommand(char key) => That.SendKeyCommand(key);
         public static void SendRunCommand(string text) => That.RunCommand(text);
@@ -75,8 +82,18 @@ namespace ServerOnlineCity
             else if (char.ToLower(key) == 's') SavePlayerStatisticsFile();
             else if (char.ToLower(key) == 'd') SaveDebugInfo();
             else if (char.ToLower(key) == 'c') RunCommandFile();
+            else if (char.ToLower(key) == 'y') ShowConnects();
             else return false;
             return true;
+        }
+
+        public static void ShowConnects()
+        {
+            Console.WriteLine($"Connections: {That.ActiveClientCount}");
+            foreach(var session in That.Sessions)
+            {
+                Console.WriteLine($"--> {session.GetContext()?.Player?.Public.Login}: {session.IsActive}");
+            }
         }
 
         public static bool SaveSettings(string storytaller, string difficulty)
@@ -160,6 +177,29 @@ namespace ServerOnlineCity
                 }
             }
 
+            //if (!string.IsNullOrEmpty(ServerSettings.DatabaseConnection))
+            //{
+            //    try
+            //    {
+            //        database = new Database(ServerSettings.DatabaseConnection);
+
+            //        database.Open();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //        Console.WriteLine($"RU: Ошибка при подключении к базе данных");
+            //        Console.WriteLine($"EN: Error while connection to database");
+            //        Console.ReadKey();
+            //    }
+            //}
+
+            //if(database != null)
+            //{
+            //    //Обновляем сессии, у которых есть ключ сессии для того, чтобы почистить зависших клиентов в случае некорректного завершения сервера
+            //    database.CheckAndClearOldSessions();
+            //}
+
             MainHelper.OffAllLog = false;
             Loger.PathLog = path;
             Loger.IsServer = true;
@@ -196,6 +236,19 @@ namespace ServerOnlineCity
 
             Loger.Log($"Server starting on port: {ServerSettings.Port}");
             Connect.Start(null, ServerSettings.Port);
+
+            //При окончании сервера оффаем все 
+            //foreach(var session in Sessions)
+            //{
+            //    if (!session.Disposed)
+            //    {
+            //        var context = session.GetContext();
+            //        if (context != null && context.Player != null)
+            //        {
+            //            ServerManager.Database.Logout(context.Player.Public.Login);
+            //        }
+            //    }
+            //}
         }
        
         /// <summary>
@@ -244,7 +297,20 @@ namespace ServerOnlineCity
             foreach (var player in Repository.GetData.GetPlayersAll)
             {
                 var pl = ChatManager.Instance.PublicChat.PartyLogin;
-                if (pl.Count == Repository.GetData.GetPlayersAll.Count) continue;
+
+                //Console.WriteLine($"{player.Public.Login} | pl: {pl.Count} | {Repository.GetData.GetPlayersAll.Count}");
+                //foreach (var p in pl)
+                //{
+                //    Console.WriteLine(p);
+                //}
+                //Console.WriteLine("-=======-");
+                //foreach (var p in Repository.GetData.GetPlayersAll)
+                //{
+                //    Console.WriteLine(p.Public.Login);
+                //}
+
+                //-1 потому что не считаем system, он нахуй не нужон
+                if (pl.Count - 1 == Repository.GetData.GetPlayersAll.Count) continue;
 
                 changeInPlayers = true;
 
@@ -653,6 +719,8 @@ namespace ServerOnlineCity
                     if (session != null)
                     {
                         session.Dispose();
+
+                        SessionsAction((s) => { });
                     }
                 }
                 catch

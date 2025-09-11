@@ -35,22 +35,32 @@ namespace ServerOnlineCity.Mechanics
         {
             Loger.Log("IncidentLod CallIncident.CreateIncident 1");
 
+            bool adminUser = player.Public.Grants >= Grants.SuperAdmin;
+
             if (!ServerManager.ServerSettings.GeneralSettings.IncidentEnable) return "OC_incidents_IncidentsTurnedOFF";
 
             //if (type == null) return "OC_Incidents_CallIncidents_TypeErr";
 
             if (targetPlayer == player) return "OC_Incidents_CallIncidebts_selfErr";
 
-            if (player.Public.LastTick / 3600000 < 2) return "OC_Incidents_CallIncidebts_YearErr1";
+            float costAllPlayer = 0;
+            float costAllTargetPlayer = 0;
 
-            if (targetPlayer.Public.LastTick / 3600000 < 2) return "OC_Incidents_CallIncidebts_YearErr2";
+            if(!adminUser)
+            {
+
+                if (player.Public.LastTick / 3600000 < 2) return "OC_Incidents_CallIncidebts_YearErr1";
+
+                if (targetPlayer.Public.LastTick / 3600000 < 2) return "OC_Incidents_CallIncidebts_YearErr2";
+
+                costAllPlayer = player.AllCostWorldObjects();
+                if (costAllPlayer < 100000f) return "OC_Incidents_CallIncidebts_CostErr1";
+
+                costAllTargetPlayer = targetPlayer.AllCostWorldObjects();
+                if (costAllTargetPlayer < 100000f) return "OC_Incidents_CallIncidebts_CostErr2";
+            }
 
 
-            var costAllPlayer = player.AllCostWorldObjects();
-            if (costAllPlayer < 100000f) return "OC_Incidents_CallIncidebts_CostErr1";
-
-            var costAllTargetPlayer = targetPlayer.AllCostWorldObjects();
-            if (costAllTargetPlayer < 100000f) return "OC_Incidents_CallIncidebts_CostErr2";
 
             Loger.Log("IncidentLod CallIncident.CreateIncident 2");
 
@@ -82,9 +92,13 @@ namespace ServerOnlineCity.Mechanics
                     .Where(m => m is FMailIncident)
                     .Cast<FMailIncident>()
                     .Where(m => m.NumberOrder == fPacket.NumberOrder);
-                
-                if (list.Count() > ServerManager.ServerSettings.GeneralSettings.IncidentCountInOffline)
+
+                if (!adminUser)
+                {
+                    if (list.Count() > ServerManager.ServerSettings.GeneralSettings.IncidentCountInOffline)
                     return "OC_Incidents_CallIncidents_MaxIncidentsCnt";
+                }
+
 
                 //if (list.Count(m => m.Mail.From.Login == ownLogin) > 1)
                 //    return "OC_Incidents_CallIncidents_NotShooted";
@@ -127,8 +141,22 @@ namespace ServerOnlineCity.Mechanics
                     Environment.NewLine, Encoding.UTF8);
             }
 
-            if (fromWorth == 0) fromWorth = (int)Repository.GetPlayerByLogin(mail.From.Login).AllCostWorldObjects();
-            if (toWorth == 0) toWorth = (int)Repository.GetPlayerByLogin(mail.To.Login).AllCostWorldObjects();
+            if (fromWorth == 0)
+            {
+                var fromPlayer = Repository.GetPlayerByLogin(mail.From?.Login);
+                if (fromPlayer != null)
+                {
+                    fromWorth = (int)fromPlayer.AllCostWorldObjects();
+                }
+            }
+            if (toWorth == 0)
+            {
+                var toPlayer = Repository.GetPlayerByLogin(mail.To?.Login);
+                if (toPlayer != null)
+                {
+                    toWorth = (int)toPlayer.AllCostWorldObjects();
+                }
+            }
 
             var param = $"{mail.IncidentType} lvl:{mail.IncidentMult}" 
                 + $" mode:" + (mail.IncidentParams != null && mail.IncidentParams.Count > 0 ? mail.IncidentParams[0] : null)  //arrivalMode / anyParam

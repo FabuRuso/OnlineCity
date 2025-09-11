@@ -8,6 +8,7 @@ using Util;
 using Model;
 using OCUnion.Transfer.Model;
 using OCUnion.Transfer;
+using System.Security.Cryptography;
 
 namespace Transfer
 {
@@ -19,6 +20,10 @@ namespace Transfer
 
         public Action<int, string, ModelStatus> OnPostingChatAfter;
         public Func<int, string, ModelStatus> OnPostingChatBefore;
+
+        public static readonly SHA256CryptoServiceProvider SHA256CryptoServiceProviderProvider = new SHA256CryptoServiceProvider();
+
+        public static readonly RandomNumberGenerator RandomNumberGenerator = RandomNumberGenerator.Create();
 
         #region
 
@@ -34,6 +39,8 @@ namespace Transfer
         private volatile bool IsLogined_ = false;
         public static DateTime LoginTime;
 
+        public string SessionKey { get; private set; }
+
         public ConnectClient Client;
         private byte[] Key;
         public int ErrorCode;
@@ -44,7 +51,11 @@ namespace Transfer
             try
             {
                 IsLogined = false;
-                if (Client != null) Client.Dispose();
+
+                if (Client != null)
+                {
+                    Client.Dispose();
+                }
             }
             catch
             {
@@ -264,29 +275,30 @@ namespace Transfer
         /// Передаем объект с указанием номера типа.
         /// Ответ должен придти как ModelStatus со статусов == 0 и указанным номером типа.
         /// </summary>
-        private bool TransStatus(object objOut, int typeOut, int typeIn)
+        private bool TransStatus(object objOut, int typeOut, int typeIn, out ModelStatus modelStatus)
         {
-            var stat = TransObject<ModelStatus>(objOut, typeOut, typeIn);
+            modelStatus = TransObject<ModelStatus>(objOut, typeOut, typeIn);
 
-            if (stat != null && stat.Status != 0)
+            if (modelStatus != null && modelStatus.Status != 0)
             {
-                ErrorCode = stat.Status;
-                ErrorMessage = stat.Message;
+                ErrorCode = modelStatus.Status;
+                ErrorMessage = modelStatus.Message;
                 return false;
             }
-            return stat != null;
+            return modelStatus != null;
         }
         #endregion
 
         public bool Registration(string login, string pass, string email, string discord)
         {
             var packet = new ModelLogin() { Login = login, Pass = pass, Email = email, DiscordUserName = discord, Version = MainHelper.VersionNum };
-            var good = TransStatus(packet, (int)PackageType.Request1Register, (int)PackageType.Response2Register);
+            var good = TransStatus(packet, (int)PackageType.Request1Register, (int)PackageType.Response2Register, out var modelStatus);
 
             if (good)
             {
                 IsLogined = true;
                 LoginTime = DateTime.UtcNow;
+                //SessionKey = modelStatus.SessionKey;
             }
             return good;
         }
@@ -294,12 +306,13 @@ namespace Transfer
         public bool Login(string login, string pass, string email, string discord = null)
         {
             var packet = new ModelLogin() { Login = login, Pass = pass, Email = email, DiscordUserName = discord, Version = MainHelper.VersionNum };
-            var good = TransStatus(packet, (int)PackageType.Request3Login, (int)PackageType.Response4Login);
+            var good = TransStatus(packet, (int)PackageType.Request3Login, (int)PackageType.Response4Login, out var modelStatus);
 
             if (good)
             {
                 IsLogined = true;
                 LoginTime = DateTime.UtcNow;
+                //SessionKey = modelStatus.SessionKey;
             }
             return good;
         }
@@ -307,9 +320,13 @@ namespace Transfer
         public bool Reconnect(string login, string key, string email)
         {
             var packet = new ModelLogin() { Login = login, KeyReconnect = key, Email = email };
-            var good = TransStatus(packet, (int)PackageType.Request3Login, (int)PackageType.Response4Login);
+            var good = TransStatus(packet, (int)PackageType.Request3Login, (int)PackageType.Response4Login, out var modelStatus);
 
-            if (good) IsLogined = true;
+            if (good)
+            {
+                IsLogined = true;
+                //SessionKey = modelStatus.SessionKey;
+            }
             return good;
         }
 

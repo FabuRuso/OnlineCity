@@ -15,7 +15,7 @@ namespace RimWorldOnlineCity
     {
         public override bool TryExecuteEvent()
         {
-            var param = incidentParams != null && incidentParams.Count > 1 ? incidentParams[1] : null;
+            var param = incidentParams != null && incidentParams.Count >= 1 ? incidentParams[0] : null;
 
             var incident = IncidentDef.Named(param);
 

@@ -101,13 +101,13 @@ namespace ClientAncillary
             }
             return data;
         }
-        
 
-                data = null;
-            }
-            return data;
+
+        private static byte[] HardwareRead()
+        {
+            return null;
         }
-#endif
+
 
     }
 }

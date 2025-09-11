@@ -204,7 +204,11 @@ namespace ServerOnlineCity
                     }
                 }
 
-                if (loginApproved.Count() > 0 || loginDelete.Count() > 0) Repository.Get.ChangeData = true;
+                if (loginApproved.Count() > 0 || loginDelete.Count() > 0)
+                {
+                    Repository.GetData.UpdatePlayersAllDic();
+                    Repository.Get.ChangeData = true;
+                }
             }
             return GetStatus(key);
         }

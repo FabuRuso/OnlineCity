@@ -624,7 +624,9 @@ namespace RimWorldOnlineCity
                     if (!cacheColonists.TryGetValue(map, out ps))
                     {
                         var mapPawnsA = new Pawn[map.mapPawns.AllPawnsSpawned.Count];
-                        map.mapPawns.AllPawnsSpawned.CopyTo(mapPawnsA);
+
+                        mapPawnsA = map.mapPawns.AllPawnsSpawned.ToArray();
+                        //map.mapPawns.AllPawnsSpawned.CopyTo(mapPawnsA);
 
                         ps = new CacheMap();
                         ps.Colonists = mapPawnsA.Where(p => p.Faction == Faction.OfPlayer /*&& p.RaceProps.Humanlike*/).ToList();
@@ -798,7 +800,7 @@ namespace RimWorldOnlineCity
 
         public static void DrawTerritory(int centralTile)
         {
-            List<int> neighbors = new List<int>(0);
+            List<PlanetTile> neighbors = new List<PlanetTile>(0);
             Find.WorldGrid.GetTileNeighbors(centralTile, neighbors);
             foreach (var tile in neighbors)
             {

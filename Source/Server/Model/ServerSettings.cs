@@ -49,6 +49,8 @@ namespace ServerCore.Model
 
         public ServerGeneralSettings GeneralSettings { get; set; }
 
+        public string DatabaseConnection { get; set; }
+
         /// <summary>
         /// Рабочая директория
         /// </summary>

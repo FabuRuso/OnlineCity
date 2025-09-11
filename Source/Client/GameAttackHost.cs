@@ -412,14 +412,16 @@ namespace RimWorldOnlineCity
                             /*try
                             {*/
                                 mapPawns = new Pawn[GameMap.mapPawns.AllPawnsSpawned.Count];
-                                GameMap.mapPawns.AllPawnsSpawned.CopyTo(mapPawns);
-                                /*
-                            }
-                            catch
-                            {
-                                Thread.Sleep(20);
-                                mapPawns = GameMap.mapPawns.AllPawns.ToList();
-                            }*/
+
+                                mapPawns = GameMap.mapPawns.AllPawnsSpawned.ToArray();
+                                //GameMap.mapPawns.AllPawnsSpawned.CopyTo(mapPawns);
+                            /*
+                        }
+                        catch
+                        {
+                            Thread.Sleep(20);
+                            mapPawns = GameMap.mapPawns.AllPawns.ToList();
+                        }*/
                             for (int i = 0; i < pawnsA.Count; i++)
                             {
                                 var label = pawnsA[i].Name;
@@ -601,7 +603,9 @@ namespace RimWorldOnlineCity
                         lock (ToSendListsSync)
                         {
                             var mapPawnsA = new Pawn[GameMap.mapPawns.AllPawnsSpawned.Count];
-                            GameMap.mapPawns.AllPawnsSpawned.CopyTo(mapPawnsA);
+
+                            mapPawnsA = GameMap.mapPawns.AllPawnsSpawned.ToArray();
+                            //GameMap.mapPawns.AllPawnsSpawned.CopyTo(mapPawnsA);
                             AllPawns = mapPawnsA.ToDictionary(p => p.thingIDNumber);
 
                             //проверяем условия победы (в паузе не проверяются, как проверка чтобы не проверялось до полной загрузки)
@@ -1294,13 +1298,13 @@ namespace RimWorldOnlineCity
         /// </summary>
         /// <param name="pawn"></param>
         /// <param name="speed"></param>
-        public void ControlPawnMoveSpeed(Pawn pawn, ref int speed)
+        public void ControlPawnMoveSpeed(Pawn pawn, ref float speed)
         {
             if (!HostPawnMoveSpeedActive) return;
 
             if (!AttackingPawnDic.ContainsKey(pawn.thingIDNumber))
             {
-                speed = (int)(speed / HostPawnMoveSpeed);
+                speed = speed / HostPawnMoveSpeed;
                 if (speed > 450) speed = 450;
             }
         }

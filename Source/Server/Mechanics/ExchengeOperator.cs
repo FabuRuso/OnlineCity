@@ -69,6 +69,12 @@ namespace ServerOnlineCity.Mechanics
                 }
             }
         }
+
+        public void RemovePlayerFromCache(string login)
+        {
+            CacheStorage.TryRemove(login, out _);
+        }
+
         public bool OrderAdd(TradeOrder order)
         {
             if (GetFromStorage(order.Tile, order.Owner.GetPlayerServer(), order.SellThings, order.CountReady) == null) return false;

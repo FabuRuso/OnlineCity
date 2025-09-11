@@ -74,7 +74,7 @@ namespace MapRenderer
                 switchedMap = true;
                 Current.Game.CurrentMap = map;
             }
-            rememberedWorldRendered = WorldRendererUtility.WorldRenderedNow;
+            rememberedWorldRendered = WorldRendererUtility.WorldRendered;
             if (rememberedWorldRendered)
             {
                 CameraJumper.TryHideWorld();

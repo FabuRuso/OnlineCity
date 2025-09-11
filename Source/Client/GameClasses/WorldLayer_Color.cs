@@ -10,8 +10,8 @@ using Verse;
 
 namespace RimWorldOnlineCity.GameClasses
 {
-	public class WorldLayer_Color : WorldLayer
-	{
+	public class WorldLayer_Color : WorldDrawLayer
+    {
 		private const int SubdivisionsCount = 4;
 
 		public const float GlowRadius = 8f;
@@ -23,7 +23,7 @@ namespace RimWorldOnlineCity.GameClasses
 				yield return item;
 			}
 			SphereGenerator.Generate(4, 108.1f, Vector3.forward, 360f, out var outVerts, out var outIndices);
-			LayerSubMesh subMesh = GetSubMesh(WorldMaterials.PlanetGlow);
+			LayerSubMesh subMesh = GetSubMesh(WorldMaterials.SelectedTile);
 			subMesh.verts.AddRange(outVerts);
 			subMesh.tris.AddRange(outIndices);
 			FinalizeMesh(MeshParts.All);

@@ -28,7 +28,7 @@ namespace RimWorldOnlineCity
 
         public override Vector2 InitialSize
         {
-            get { return new Vector2(530f, 400f); }
+            get { return new Vector2(470f, 450f); }
         }
 
         public Dialog_LoginForm(bool needApprove = false)
@@ -166,15 +166,26 @@ OOOOOOOOOO
             if (NeedApprove)
             {
                 Text.Font = GameFont.Small;
+
+                var prevColor = GUI.color;
+                var prevContentColor = GUI.contentColor;
+                GUI.color = Color.green;
+                GUI.contentColor = Color.green;
+
                 mainListing.Label("OCity_LoginForm_NeedApproveText0".Translate());
+
+                GUI.contentColor = prevContentColor;
+                GUI.color = prevColor;
+
                 mainListing.GapLine();
             }
+
             mainListing.Gap();
             mainListing.End();
             
             var irect = new Rect(inRect);
             irect.y += mainListing.CurHeight;
-            irect.width -= 135;
+            irect.width -= 40;
             mainListing.Begin(irect);
 
             Text.Font = GameFont.Small;
@@ -187,14 +198,24 @@ OOOOOOOOOO
                 var textForm = new Dialog_TextOut(Dialog_MainOnlineCity.AboutGeneralText);
                 Find.WindowStack.Add(textForm);
             }, GeneralTexture.IconForums);
-            item.DrawOption(new Vector2(iresct.x, iresct.y), 170f/*iresct.width*/);
+            item.DrawOption(new Vector2(iresct.x, iresct.y), 100f/*iresct.width*/);
 
             item = new ListableOption_WebLink("Send bug data".NeedTranslate(), () =>
             {
                 GameUtils.GetBug();
                 Close();
             }, GeneralTexture.OCBug);
-            item.DrawOption(new Vector2(iresct.x + 170f, iresct.y), 170f/*iresct.width*/);
+            item.DrawOption(new Vector2(iresct.x + 100f, iresct.y), 130f/*iresct.width*/);
+
+            item = new ListableOption_WebLink("OCity_Dialog_Exchenge_Server_Description".Translate(), () =>
+            {
+                var desc = MainHelper.GetServerDescription(InputName);
+                var textForm = new Dialog_TextOut(desc);
+                Find.WindowStack.Add(textForm);
+            }, GeneralTexture.OC_Description);
+            item.DrawOption(new Vector2(iresct.x + 220f, iresct.y), 170f/*iresct.width*/);
+
+
             //var rectBug = new Rect(iresct.x + 190f, iresct.y, 140f, 24f);
             //GUI.DrawTexture(new Rect(rectBug.x, rectBug.y, 24f, 24f), GeneralTexture.OCBug);
             //Widgets.Label(new Rect(rectBug.x + 30f, rectBug.y, rectBug.width - 30f, 24f), "Send bug data");
@@ -269,7 +290,7 @@ OOOOOOOOOO
                     try
                     {
                         Thread.Sleep(500);
-                        Find.WindowStack.Add(new Dialog_MessageBox("OCity_LoginForm_NeedApproveText0".Translate()));
+                        //Find.WindowStack.Add(new Dialog_MessageBox("OCity_LoginForm_NeedApproveText0".Translate()));
                     }
                     catch { }
                 });

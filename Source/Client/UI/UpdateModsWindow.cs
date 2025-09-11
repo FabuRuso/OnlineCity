@@ -92,7 +92,7 @@ namespace RimWorldOnlineCity.UI
 
             var textEditSize = new Vector2(150f, 25f);
             var rect = new Rect(0, 70f, inRect.width, textEditSize.y);
-            mainListing.Label(HashStatus, -1f, null);
+            mainListing.Label(HashStatus, -1f, tipSignal: null);
             mainListing.Gap();
 
             if (SummaryList != null)

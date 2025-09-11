@@ -121,10 +121,10 @@ namespace RimWorldOnlineCity
         {
             content = content.Trim();
             if (!int.TryParse(content, out int tile)) return null;
-            if (tile < 0 || tile >= Find.WorldGrid.tiles.Count) return null;
+            if (tile < 0 || tile >= Find.WorldGrid.TilesCount) return null;
 
             // Получаем строку с "координаты название (холмистость)"
-            var biome = Find.WorldGrid[tile].biome;
+            var biome = Find.WorldGrid[tile].PrimaryBiome;
             Vector2 vector = Find.WorldGrid.LongLatOf(tile);
             var coor = vector.y.ToStringLatitude() + " " + vector.x.ToStringLongitude();
             var msg = $"<img name=Waypoint />{coor} <l>{biome.defName}.label</l>";

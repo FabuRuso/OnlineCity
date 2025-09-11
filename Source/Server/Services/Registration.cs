@@ -1,6 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Npgsql;
 using OCUnion;
 using OCUnion.Transfer.Model;
+using Server;
 using ServerOnlineCity.Model;
 using Transfer;
 
@@ -22,6 +27,15 @@ namespace ServerOnlineCity.Services
 
         private ModelStatus registration(ModelLogin packet, ServiceContext context)
         {
+            if (Repository.GetData.EverybodyLogoff)
+            {
+                return new ModelStatus()
+                {
+                    Status = 999,
+                    Message = "Server is shutting down"
+                };
+            }
+
             packet.Email = Repository.CheckIsIntruder(context, packet.Email, packet.Login);
             Loger.Log($"Player {packet.Login} attempt to register on the server.", Loger.LogLevel.REGISTER);
 
@@ -44,15 +58,15 @@ namespace ServerOnlineCity.Services
                 };
             }
 
-            if (ServerManager.ServerSettings.PlayerNeedApproveInDiscord && (packet.DiscordUserName ?? "").Length <= 2)
-            {
-                return new ModelStatus()
-                {
-                    Status = 1,
-                    Message = "OC_LoginForm_NeedApproveText1",
-                    // На данном сервере необходимо подтверждение в дискорде. Укажите своё имя в дискорде, зарегистрируйтесь здесь, а затем подтвердите регистрацию в дискорде в ответе на запрос от бота.
-                };
-            }
+            //if (ServerManager.ServerSettings.PlayerNeedApproveInDiscord && (packet.DiscordUserName ?? "").Length <= 2)
+            //{
+            //    return new ModelStatus()
+            //    {
+            //        Status = 1,
+            //        Message = "OC_LoginForm_NeedApproveText1",
+            //        // На данном сервере необходимо подтверждение в дискорде. Укажите своё имя в дискорде, зарегистрируйтесь здесь, а затем подтвердите регистрацию в дискорде в ответе на запрос от бота.
+            //    };
+            //}
 
             packet.Login = packet.Login.Trim();
             if (!Repository.GetData.NameValidator.CheckFree(packet.Login))
@@ -64,11 +78,18 @@ namespace ServerOnlineCity.Services
                 };
             }
 
+            byte[] passwordSalt = new byte[8];
+            SessionClient.RandomNumberGenerator.GetBytes(passwordSalt);
+            string passwordSaltInt = Convert.ToBase64String(passwordSalt);
+
+            //string passwordHash = Database.ComputeHash(packet.Pass, SessionClient.SHA256CryptoServiceProviderProvider, passwordSalt);
+
             var isAdmin = Repository.GetData.PlayersAll.Count == 2;// 1 : system, 2 : discord и если  в этот момент добавляетесь Вы, voilà получаете админские права 
             context.Player = new PlayerServer(packet.Login)
             {
                 Pass = packet.Pass,
             };
+            context.Player.PasswordSalt = passwordSaltInt;
             context.Player.Public.EMail = packet.Email;
             context.Player.Public.Version = packet.Version;
             context.Player.Public.DiscordUserName = packet.DiscordUserName;
@@ -86,8 +107,16 @@ namespace ServerOnlineCity.Services
 
             ChatManager.Instance.PublicChat.LastChanged = System.DateTime.UtcNow;
             Repository.GetData.PlayersAll.Add(context.Player);
+
+            if (!ServerManager.ServerSettings.PlayerNeedApprove)
+            {
+                context.Player.Approve = true;
+                Loger.Log("Server Auto Approve player " + context.Player.Public.Login);
+            }
+
             Repository.GetData.UpdatePlayersAllDic();
             Repository.Get.ChangeData = true;
+
             Loger.Log($"Player {packet.Login} version: {packet.Version.ToString()}");
             Loger.Log($"Player {packet.Login} successfully register on this server.", Loger.LogLevel.REGISTER);
 
@@ -101,16 +130,29 @@ namespace ServerOnlineCity.Services
                     Message = "User not approve"
                 };
             }
-            else
-            {
-                context.Player.Approve = true;
-                Loger.Log("Server Auto Approve player " + context.Player.Public.Login);
-            }
+
+            //Database.GenerateSessionKey(packet.Pass, out var sessionKey, out var saltInt);
+            //if (ServerManager.Database != null)
+            //{
+            //    if (!ServerManager.Database.IsUserExist(packet.Login))
+            //    {
+            //        ServerManager.Database.CreateUser(packet.Login, passwordHash, passwordSaltInt, packet.Email, packet.DiscordUserName, packet.Version, sessionKey, saltInt);
+            //    }
+            //    else
+            //    {
+            //        return new ModelStatus()
+            //        {
+            //            Status = 1,
+            //            Message = "This login already exists"
+            //        };
+            //    }
+            //}
 
             return new ModelStatus()
             {
                 Status = 0,
-                Message = null
+                Message = null,
+                //SessionKey = sessionKey
             };
         }
     }

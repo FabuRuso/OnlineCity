@@ -2245,6 +2245,7 @@ namespace RimWorldOnlineCity.UI
                             .Select(wo => wo.Tile)
                             .Distinct()
                             .Where(t => GameUtils.DistanceBetweenTile(PlaceCurrent.Tile, t) <= FilterTileLength)
+                            .Select(t => t.Tile.tile.tileId)
                             .ToList();
 
                     StatusLoadOrders = "...";

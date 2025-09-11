@@ -214,7 +214,7 @@ namespace RimWorldOnlineCity.GameClasses
         public static void Postfix(Rect rect, ref float lineEndWidth)
         {
             WorldObject singleSelectedObject = Find.WorldSelector.SingleSelectedObject;
-            if (singleSelectedObject != null || Find.WorldSelector.selectedTile >= 0)
+            if (singleSelectedObject != null || Find.WorldSelector.SelectedTile >= 0)
             {
                 lineEndWidth += 30f;
                 var iconCopy = new Rect(rect.width - lineEndWidth, -2f, 30f, 30f);
@@ -232,7 +232,7 @@ namespace RimWorldOnlineCity.GameClasses
                     }
                     else
                     {
-                        int tile = singleSelectedObject != null ? singleSelectedObject.Tile : Find.WorldSelector.selectedTile;
+                        int tile = singleSelectedObject != null ? singleSelectedObject.Tile : Find.WorldSelector.SelectedTile;
                         var msg = $"<#{tile}/>";
                         ChatController.AddToInputChat(msg, true);
                     }

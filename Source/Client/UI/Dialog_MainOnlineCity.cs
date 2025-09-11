@@ -27,6 +27,9 @@ namespace RimWorldOnlineCity
         public static string AboutGeneralText = MainHelper.VersionInfo + " "
             + "OCity_AboutTabText".Translate() + Environment.NewLine + Environment.NewLine
             + "OCity_AboutGeneralText".Translate();
+
+        public static string ServerDescription = MainHelper.ServerList.ToString();
+
         private static TextBox AboutBox = new TextBox()
         {
             Text = AboutGeneralText

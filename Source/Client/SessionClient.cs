@@ -1,10 +1,12 @@
 ﻿using Model;
 using OCUnion;
 using OCUnion.Transfer;
+using OCUnion.Transfer.FleaMarket;
 using OCUnion.Transfer.Model;
 using System.Collections.Generic;
 using Transfer;
 using Transfer.ModelMails;
+using static UnityEngine.Random;
 
 namespace RimWorldOnlineCity
 {
@@ -157,6 +159,16 @@ namespace RimWorldOnlineCity
             }
 
             return stat != null;
+        }
+
+        public FleaMarketFactionGoodsResponse GetFactionGoods(string factionDefName)
+        {
+            return TransObject<FleaMarketFactionGoodsResponse>(new FleaMarketFactionGoodsRequest() { FactionDefName = factionDefName}, (int)PackageType.Request57GetFactionGoods, (int)PackageType.Response57GetFactionGoods);
+        }
+
+        public FleaMarketBuyItemResponse BuyItem(int id, int count)
+        {
+            return TransObject<FleaMarketBuyItemResponse>(new FleaMarketBuyItemRequest() { Id = id, Count = count }, (int)PackageType.Request58BuyFactionGood, (int)PackageType.Response58BuyFactionGood);
         }
 
         public int ExchengeInfo_GetCountThing(ThingTrade thing)

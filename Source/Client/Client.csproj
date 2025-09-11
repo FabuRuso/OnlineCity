@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RimWorldOnlineCity</RootNamespace>
     <AssemblyName>RimWorldOnlineCity</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -67,39 +67,24 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.0.4\lib\net472\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\BiOnline\packages\Lib.Harmony.2.2.2\lib\net48\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\BiOnline\GameLibs\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="com.rlabrecque.steamworks.net">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\com.rlabrecque.steamworks.net.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\BiOnline\GameLibs\com.rlabrecque.steamworks.net.dll</HintPath>
     </Reference>
     <Reference Include="HugsLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UnlimitedHugs.Rimworld.HugsLib.8.0.0\lib\net472\HugsLib.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="netstandard" />
+    <Reference Include="OCUnion">
+      <HintPath>..\BuildOutput\Union\Debug\OCUnion.dll</HintPath>
     </Reference>
     <Reference Include="System.Management" />
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="0System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\0System.Drawing.dll</HintPath>
@@ -114,9 +99,191 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\BiOnline\GameLibs\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.AndroidJNIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ARModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ClusterRendererModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.DSPGraphModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.HotReloadModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ProfilerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.SubstanceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.SubsystemsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.TextCoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.TLSModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UmbraModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.VFXModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>..\..\BiOnline\GameLibs\UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -164,8 +331,11 @@
     <Compile Include="GameClasses\TradeOrdersOnline.cs" />
     <Compile Include="GameClasses\TradeThingsOnline.cs" />
     <Compile Include="GameClasses\WorldObjectBaseOnline.cs" />
-        <Compile Include="MailController.cs" />
+    <Compile Include="GameConditionDefOfLocal.cs" />
+    <Compile Include="Lib\RenderMap.cs" />
+    <Compile Include="MailController.cs" />
     <Compile Include="Model\ClientHashCheckerResult.cs" />
+    <Compile Include="PawnsArrivalModeDefOfLocal.cs" />
     <Compile Include="Services\AnyLoad.cs" />
     <Compile Include="Services\ClientHashChecker.cs" />
     <Compile Include="Services\IOnlineCityClientService.cs" />
@@ -230,14 +400,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnionDll\UnionDll.csproj">
-      <Project>{9513586e-b487-4bee-a3fb-0d277d4e5b5c}</Project>
-      <Name>UnionDll</Name>
-      <Private>True</Private>
-      <SpecificVersion>False</SpecificVersion>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -254,47 +416,53 @@
     <!--
     Copy Source files 
     -->
+    <!--
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\1.1\&quot;            &quot;$(RimWorldModFolder)\OnlineCity\1.1\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\About\&quot;          &quot;$(RimWorldModFolder)\OnlineCity\About\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\Documentation\&quot;  &quot;$(RimWorldModFolder)\OnlineCity\Documentation\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\Languages\&quot;      &quot;$(RimWorldModFolder)\OnlineCity\Languages\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\Textures\&quot;       &quot;$(RimWorldModFolder)\OnlineCity\Textures\&quot;" />
+	-->
     <Message Importance="high" Text="--Done deploy sources project files--" />
     <!--
     Copy Comilled files 
     -->
-    <Message Importance="high" Text="--Starting deploy compilled project files--" />
+    <!--
+    <Message Importance="high" Text="-Starting deploy compilled project files-" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Debug\ISharpZipLib.dll&quot;            &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Debug\OCUnion.pdb&quot;                 &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Debug\OCUnion.dll&quot;                 &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Debug\RimWorldOnlineCity.dll&quot;      &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Debug\RimWorldOnlineCity.pdb&quot;      &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
-    <Message Importance="high" Text="--Done deploy compilled project files--" />
+    <Message Importance="high" Text="-Done deploy compilled project files-" />
     <Message Importance="high" Text="DONE!" />
+	-->
   </Target>
   <!--
       This is section for Release build. 
   -->
+  <!--
   <Target Name="BeforeReleaseBuild" Condition=" '$(Configuration)' == 'Release' " BeforeTargets="Build">
-    <Message Importance="high" Text="------------Target Release------------" />
+    <Message Importance="high" Text="-Target Release" />
     <Warning Text="This build not for Release! All code from RimWorldOnlineCity.dll and Union.dll will not obfuscating !" />
   </Target>
   <Target Name="deploySourcesToBuild" Condition=" '$(Configuration)' == 'Release' " AfterTargets="Build">
-    <Message Importance="high" Text="-----------Build release client complete-----------" />
-    <Message Importance="high" Text="--Starting deploy sources project files--" />
+    <Message Importance="high" Text="-Build release client complete-" />
+    <Message Importance="high" Text="-Starting deploy sources project files-" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\1.1\&quot;            &quot;$(RimWorldModFolder)\OnlineCity\1.1\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\About\&quot;          &quot;$(RimWorldModFolder)\OnlineCity\About\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\Documentation\&quot;  &quot;$(RimWorldModFolder)\OnlineCity\Documentation\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\Languages\&quot;      &quot;$(RimWorldModFolder)\OnlineCity\Languages\&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\..\Textures\&quot;       &quot;$(RimWorldModFolder)\OnlineCity\Textures\&quot;" />
-    <!--
+    
     Copy Comilled files 
-    -->
-    <Message Importance="high" Text="--Starting deploy compilled project files--" />
+
+    <Message Importance="high" Text="-Starting deploy compilled project files-" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Release\ISharpZipLib.dll&quot;            &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Release\OCUnion.dll&quot;                 &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
     <Exec Command="xcopy /ey &quot;$(ProjectDir)..\BuildOutput\Client\Release\RimWorldOnlineCity.dll&quot;      &quot;$(RimWorldModFolder)\OnlineCity\1.1\Assemblies&quot;" />
-    <Message Importance="high" Text="--Done deploy compilled project files--" />
+    <Message Importance="high" Text="-Done deploy compilled project files-" />
     <Message Importance="high" Text="DONE!" />
   </Target>
+  -->
 </Project>

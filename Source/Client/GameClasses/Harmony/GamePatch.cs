@@ -14,6 +14,7 @@ using System.Threading;
 using UnityEngine;
 using Verse;
 using RimWorldOnlineCity;
+using LudeonTK;
 
 namespace RimWorldOnlineCity.GameClasses.Harmony
 {
@@ -639,12 +640,12 @@ namespace RimWorldOnlineCity.GameClasses.Harmony
     /// ////////////////////////////////////////////////////////////
     /// 
     //Передача в торговый склад из капсулы, когда она приземляется, а товар теряется
-    [HarmonyPatch(typeof(TravelingTransportPods))]
+    [HarmonyPatch(typeof(TravellingTransporters))]
     [HarmonyPatch("DoArrivalAction")]
     internal class TravelingTransportPods_DoArrivalAction_Patch
     {
         [HarmonyPrefix]
-        public static bool Prefix(TravelingTransportPods __instance)
+        public static bool Prefix(TravellingTransporters __instance)
         {
             if (Current.Game == null) return true;
             if (!SessionClient.Get.IsLogined) return true;
@@ -655,7 +656,7 @@ namespace RimWorldOnlineCity.GameClasses.Harmony
             Loger.Log($"Client TravelingTransportPods SaveGame and ExchengeStorage 1", Loger.LogLevel.EXCHANGE);
 
             var that = Traverse.Create(__instance);
-            var pods = that.Field("pods").GetValue<List<ActiveDropPodInfo>>();
+            var pods = that.Field("transporters").GetValue<List<ActiveTransporterInfo>> ();
 
             var toTargetThing = new List<Thing>();
             for (int j = 0; j < pods.Count; j++)

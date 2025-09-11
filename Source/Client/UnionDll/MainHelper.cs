@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Verse;
 
 namespace OCUnion
@@ -44,17 +49,99 @@ namespace OCUnion
 
         public static string DefaultIP = DebugMode ? "localhost" : " ";
 
-        public static Dictionary<string, string> ServerList = new Dictionary<string, string> 
+        //        public static Dictionary<string, string> ServerList = new Dictionary<string, string> 
+        //        {
+        //            { "Vanilla", "185.221.214.172:19024" },
+        //            { "Fantasy", "185.221.214.172:19022" },
+        //            { "BIOnline", "185.221.214.172:19024"},
+        //#if DEBUG
+        //            { "localhost", "127.0.0.1" },
+        //#endif
+        //        };
+
+        // Замена списка серверов на Pastebin
+
+        public static Dictionary<string, string> ServerList = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> ServerDescriptions = new Dictionary<string, string>();
+
+        public static void LoadServerList()
         {
-            { "Vanilla", "62.3.58.251:19042" },
-            { "Fantasy", "62.3.58.251:19022" },
-            { "SkyNet CE+SRTS", "95.154.71.53:6666"},
-            { "BIOnline", "62.3.58.251:19024"},
-            { "Hi-Tech","62.3.58.251:19023"},
-#if DEBUG
-            { "localhost", "127.0.0.1" },
-#endif
-        };
+            string pastebinRawUrl = "https://pastebin.com/raw/Jrg3sR0P";
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    client.Encoding = Encoding.UTF8;
+                    string json = client.DownloadString(pastebinRawUrl);
+
+                    // Парсим гибко: поддержка и старого, и нового формата
+                    var servers = new Dictionary<string, string>();
+                    var descriptions = new Dictionary<string, string>();
+
+                    var token = JToken.Parse(json);
+                    if (token.Type == JTokenType.Object)
+                    {
+                        foreach (var prop in ((JObject)token).Properties())
+                        {
+                            // Старый формат: "Name": "ip:port"
+                            if (prop.Value.Type == JTokenType.String)
+                            {
+                                var addr = prop.Value.Value<string>();
+                                if (!string.IsNullOrWhiteSpace(prop.Name) && !string.IsNullOrWhiteSpace(addr))
+                                    servers[prop.Name] = addr;
+                            }
+                            // Новый формат: "Name": { "address": "...", "description": "..." }
+                            else if (prop.Value.Type == JTokenType.Object)
+                            {
+                                var obj = (JObject)prop.Value;
+                                var addr = obj["address"]?.Value<string>()
+                                           ?? obj["ip"]?.Value<string>()
+                                           ?? obj["addr"]?.Value<string>();
+                                var desc = obj["description"]?.Value<string>() ?? obj["desc"]?.Value<string>();
+
+                                if (!string.IsNullOrWhiteSpace(prop.Name) && !string.IsNullOrWhiteSpace(addr))
+                                    servers[prop.Name] = addr;
+
+                                if (!string.IsNullOrWhiteSpace(desc))
+                                    descriptions[prop.Name] = desc.Replace("\\n", "\n"); // поддержка \n в JSON
+                            }
+                        }
+                    }
+
+                    // Если не распознали как объект — пробуем как старый словарь
+                    if (servers.Count == 0)
+                    {
+                        var parsed = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                        if (parsed != null) servers = parsed;
+                    }
+
+                    if (servers.Count > 0) ServerList = servers;
+                    if (descriptions.Count > 0) ServerDescriptions = descriptions;
+                }
+
+                Loger.Log("Сервера (и описания, если были) обновлены из Pastebin");
+            }
+            catch (Exception ex)
+            {
+                Loger.Log("Ошибка загрузки списка серверов из Pastebin: " + ex.Message);
+            }
+        }
+
+        public static string GetServerDescription(string serverName)
+        {
+            if (string.IsNullOrWhiteSpace(serverName))
+                return "Сначала выберите сервер в списке.";
+
+            if (ServerDescriptions != null
+                && ServerDescriptions.TryGetValue(serverName, out var text)
+                && !string.IsNullOrWhiteSpace(text))
+                return text;
+
+            return $"Описание для сервера \"{serverName}\" не найдено.";
+        }
+
+
 
         public static int MinCostForTrade = 100000;
 

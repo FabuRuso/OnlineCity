@@ -55,7 +55,7 @@ namespace RimWorldOnlineCity
 		{
 			int maxMineables = 1;
 			//CellFinder.TryFindRandomCellInRegion();
-			return CellFinderLoose.TryFindSkyfallerCell(ThingDefOf.MeteoriteIncoming, map, out cell, 10, default(IntVec3), -1, allowRoofedCells: true, allowCellsWithItems: false, allowCellsWithBuildings: true, colonyReachable: true, avoidColonistsIfExplosive: false, alwaysAvoidColonists: false, delegate (IntVec3 x)
+			return CellFinderLoose.TryFindSkyfallerCell(ThingDefOf.MeteoriteIncoming, map, TerrainAffordanceDefOf.Walkable, out cell, 10, default(IntVec3), -1, allowRoofedCells: true, allowCellsWithItems: false, allowCellsWithBuildings: true, colonyReachable: true, avoidColonistsIfExplosive: false, alwaysAvoidColonists: false, delegate (IntVec3 x)
 			{
 				int num = Mathf.CeilToInt(Mathf.Sqrt(maxMineables));
 				CellRect cellRect = CellRect.CenteredOn(x, num, num);

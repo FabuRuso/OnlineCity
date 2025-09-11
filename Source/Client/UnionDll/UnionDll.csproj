@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OCUnion</RootNamespace>
     <AssemblyName>OCUnion</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -65,7 +65,8 @@
   -->
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>$(RimWorldFolder)RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\BiOnline\GameLibs\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\BiOnline\GameLibs\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
@@ -73,8 +74,12 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -92,6 +97,15 @@
     <Compile Include="GameXMLUtils.cs" />
     <Compile Include="Loger.cs" />
     <Compile Include="Transfer\ConnectSaver.cs" />
+    <Compile Include="Transfer\FleaMarket\CustomData\FleaMarketItemCustomData_Stuff.cs" />
+    <Compile Include="Transfer\FleaMarket\CustomData\FleaMarketItemCustomData_Quality.cs" />
+    <Compile Include="Transfer\FleaMarket\FleaMarketBuyItemResponse.cs" />
+    <Compile Include="Transfer\FleaMarket\FleaMarketBuyItemRequest.cs" />
+    <Compile Include="Transfer\FleaMarket\FleaMarketFactionGoodsRequest.cs" />
+    <Compile Include="Transfer\FleaMarket\FleaMarketFactionGoodsResponse.cs" />
+    <Compile Include="Transfer\FleaMarket\FleaMarketItemTradeability.cs" />
+    <Compile Include="Transfer\FleaMarket\FleaMarketItemCustomData.cs" />
+    <Compile Include="Transfer\FleaMarket\FleaMarketItem.cs" />
     <Compile Include="Transfer\FolderTree.cs" />
     <Compile Include="Transfer\Incident\Incidents.cs" />
     <Compile Include="Transfer\ModelGameServerInfo.cs" />

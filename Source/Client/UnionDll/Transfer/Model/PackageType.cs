@@ -210,5 +210,17 @@ namespace OCUnion.Transfer.Model
         /// Получить расширенную информацию об игроке
         /// </summary>
         Response56PlayerInfoExtended,
+
+        /// <summary>
+        /// Получить предметы барахолки
+        /// </summary>
+        Request57GetFactionGoods,
+        Response57GetFactionGoods,
+
+        /// <summary>
+        /// Купить предмет барахолки
+        /// </summary>
+        Request58BuyFactionGood,
+        Response58BuyFactionGood
     }
 }

@@ -24,6 +24,12 @@ namespace RimWorldOnlineCity
         public static void OnMainMenuNetClick()
         {
             HasClickMainMenuNetClick = true;
+
+            if (MainHelper.ServerList == null || MainHelper.ServerList.Count == 0)
+            {
+                MainHelper.LoadServerList();
+            }
+
             //Find.WindowStack.Add(new Dialog_LoginForm()); return;
             if (SessionClientController.ClientFileCheckers == null || SessionClientController.ClientFileCheckers.Any(x => x == null || !x.Complete))
             //if (!SessionClientController.ClientFileCheckersComplete)
@@ -119,13 +125,13 @@ namespace RimWorldOnlineCity
                         optList.Add(item);
                         // }}} */
 
-                        item = new ListableOption("Save".Translate(), delegate
-                        {
-                            Loger.Log("Client MainMenu Save");
-                            SessionClientController.SaveGameNowInEvent();
-                            Find.WindowStack.Add(new Dialog_Input("OCity_MainMenu_Saved".Translate(), "", true));
-                        }, null);
-                        optList.Add(item);
+                            item = new ListableOption("Save".Translate(), delegate
+                            {
+                                Loger.Log("Client MainMenu Save");
+                                SessionClientController.SaveGameNowInEvent();
+                                Find.WindowStack.Add(new Dialog_Input("OCity_MainMenu_Saved".Translate(), "", true));
+                            }, null);
+                            optList.Add(item);
 
                         if (SessionClientController.Data.AttackModule != null)
                         {

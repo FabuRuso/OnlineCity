@@ -518,7 +518,7 @@ namespace RimWorldOnlineCity
                             }
                             else
                             {
-                                var tileLabel = Find.WorldGrid[wo.Tile].biome.LabelCap;
+                                var tileLabel = Find.WorldGrid[wo.Tile].PrimaryBiome.LabelCap;
                                 Widgets.Label(rect, tileLabel);
                             }
                         },

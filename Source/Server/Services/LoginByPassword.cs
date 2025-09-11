@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OCUnion;
 using OCUnion.Transfer.Model;
+using Server;
 using ServerOnlineCity.Model;
 using Transfer;
 using Transfer.ModelMails;
@@ -25,6 +26,15 @@ namespace ServerOnlineCity.Services
 
         private ModelStatus login(ModelLogin packet, ServiceContext context)
         {
+            if (Repository.GetData.EverybodyLogoff)
+            {
+                return new ModelStatus()
+                {
+                    Status = 999,
+                    Message = "Server is shutting down"
+                };
+            }
+
             Loger.Log($"Player {packet.Login} start login on server.", Loger.LogLevel.LOGIN);
             Loger.Log($"Player {packet.Login} client version {packet.Version.ToString()}.", Loger.LogLevel.LOGIN);
             packet.Email = Repository.CheckIsIntruder(context, packet.Email, packet.Login);
@@ -32,9 +42,9 @@ namespace ServerOnlineCity.Services
             if (packet.Login == "system") return null;
 
             var player = Repository.GetPlayerByLogin(packet.Login, true);
-            
             if (player != null)
             {
+                //string passwordHash = Database.ComputeHash(packet.Pass, SessionClient.SHA256CryptoServiceProviderProvider, Convert.FromBase64String(player.PasswordSalt));
                 if (!string.IsNullOrEmpty(packet.KeyReconnect))
                 {
                     if (!player.KeyReconnectVerification(packet.KeyReconnect))
@@ -113,6 +123,12 @@ namespace ServerOnlineCity.Services
                 }
             }
 
+            //Database.GenerateSessionKey(packet.Pass, out var sessionKey, out var saltInt);
+            //if (ServerManager.Database != null)
+            //{
+            //    ServerManager.Database.Login(packet.Login, sessionKey, saltInt);
+            //}
+
             context.Player = player;
 
             context.Logined();
@@ -120,7 +136,8 @@ namespace ServerOnlineCity.Services
             return new ModelStatus()
             {
                 Status = 0,
-                Message = null
+                Message = null,
+                //SessionKey = sessionKey
             };
         }
     }

@@ -1,3 +1,4 @@
+using LudeonTK;
 using Model;
 using OCUnion;
 using OCUnion.Common;
@@ -795,7 +796,7 @@ namespace RimWorldOnlineCity
             var pass = new CryptoProvider().GetHash(password);
 
             var connect = SessionClient.Get;
-            if (!connect.Login(login, pass, GetSaffix()))
+            if (!connect.Login(login, pass/*password*/, GetSaffix()))
             {
                 if (connect.ErrorMessage == "User not approve")
                 {
@@ -842,7 +843,7 @@ namespace RimWorldOnlineCity
             var pass = new CryptoProvider().GetHash(password);
 
             var connect = SessionClient.Get;
-            if (!connect.Registration(login, pass, email + GetSaffix(), discord))
+            if (!connect.Registration(login, pass /*password*/, email + GetSaffix(), discord))
             {
                 if (connect.ErrorMessage == "User not approve")
                 {
@@ -1342,7 +1343,8 @@ namespace RimWorldOnlineCity
                 GameStarter.SetSeed,
                 GameStarter.SetOverallRainfall,
                 GameStarter.SetOverallTemperature,
-                OverallPopulation.Little
+                OverallPopulation.Little,
+                LandmarkDensity.Normal
                 );
 
             Loger.Log("Client InitConnected() ExistMap3");
@@ -1482,10 +1484,6 @@ namespace RimWorldOnlineCity
 
             Find.WindowStack.Add(new Dialog_Input("OCity_SessionCC_MsgCreatingServer".Translate(), msg, true)
             {
-                PostCloseAction = () =>
-                {
-                    GenScene.GoToMainMenu();
-                }
             });
         }
 

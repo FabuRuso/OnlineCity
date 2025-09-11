@@ -149,7 +149,7 @@ namespace Util
         private static readonly byte[] SALT = new byte[] { 0x94, 0xF8, 0xEE, 0xA0, 0x00, 0x01, 0xFF, 0xE6, 0x74, 0x35, 0x07, 0xFE, 0x9D, 0x1E, 0x47, 0xBB };
 
 
-        private static Encoding KeyEncoding = Encoding.ASCII;//.GetEncoding(1252);
+        public static Encoding KeyEncoding = Encoding.ASCII;//.GetEncoding(1252);
         public static byte[] SymmetricEncrypt(byte[] plain, byte[] password)
         {
             return SymmetricEncrypt(plain, KeyEncoding.GetString(password));

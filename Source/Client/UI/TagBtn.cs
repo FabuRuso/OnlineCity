@@ -100,7 +100,7 @@ namespace RimWorldOnlineCity.UI
                 {
                     if (!int.TryParse(d, out var tile)) return btn;
 
-                    var tileLabel = Find.WorldGrid[tile].biome.LabelCap;
+                    var tileLabel = Find.WorldGrid[tile].PrimaryBiome.LabelCap;
 
                     Vector2 vector = Find.WorldGrid.LongLatOf(tile);
                     btn.Tooltip = "OCity_Coordinates".Translate()

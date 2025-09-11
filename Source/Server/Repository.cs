@@ -294,7 +294,10 @@ namespace ServerOnlineCity
                     var item = data.Orders[i];
                     if (item.Owner.Login != login) continue;
                     data.OrderOperator.OrderRemove(item);
+
+                    data.OrderOperator.RemovePlayerFromCache(login);
                 }
+
 
                 //удаление всех скринов колоний с сервера
                 //пример World\DataPlayers\colonyscreen\login_6_157.png 

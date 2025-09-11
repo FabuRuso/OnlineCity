@@ -89,7 +89,7 @@ namespace RimWorldOnlineCity
                 case "walk":
                     return PawnsArrivalModeDefOf.EdgeWalkIn;
                 case "random":
-                    return PawnsArrivalModeDefOf.RandomDrop;
+                    return PawnsArrivalModeDefOfLocal.RandomDrop;
                 case "air":
                     return PawnsArrivalModeDefOf.CenterDrop;
                 default:

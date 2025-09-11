@@ -108,7 +108,7 @@ namespace ServerOnlineCity.ChatService
             List<string> parameters = new List<string>();
             for (int i = 4; i < argsM.Count; i++)
             {
-                parameters.Add((argsM[i] ?? "").ToLower().Trim());
+                parameters.Add((argsM[i] ?? "").Trim());
             }
 
             /*
@@ -131,7 +131,6 @@ namespace ServerOnlineCity.ChatService
                 faction = Incidents.ParseFaction(argsM[5]);
             }
             */
-
             Loger.Log("IncidentLod CallIncidentCmd Execute 2 " + argsM[1]);
             string error = null;
             if (targetPlayer != null)

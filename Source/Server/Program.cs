@@ -30,6 +30,8 @@ namespace ServerOnlineCity
             th.Start();
 
             Manager.Start();
+
+            //ServerManager.Database?.Dispose();
         }
 
         private static void CommandInput()

@@ -86,7 +86,7 @@ namespace RimWorldOnlineCity
         public static bool Off = false;
         
         [HarmonyPostfix]
-        public static void Postfix(ref bool __result, int tile, StringBuilder reason)
+        public static void Postfix(ref bool __result, PlanetTile tile, StringBuilder reason)
         {
             if (Off) return;
             if (!__result) return;

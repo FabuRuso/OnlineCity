@@ -52,6 +52,7 @@ namespace RimWorldOnlineCity
         public static readonly Texture2D RankingDown;
         public static readonly Texture2D BaseOnlineButtonShowMap;
         public static readonly Texture2D IncidentViewIcon;
+        public static readonly Texture2D OC_Description;
 
         static GeneralTexture()
         {
@@ -89,6 +90,7 @@ namespace RimWorldOnlineCity
             RankingDown = ContentFinder<Texture2D>.Get("RankingDown");
             BaseOnlineButtonShowMap = ContentFinder<Texture2D>.Get("ShowMap");
             IncidentViewIcon = ContentFinder<Texture2D>.Get("IncidentViewIcon");
+            OC_Description = ContentFinder<Texture2D>.Get("OC_Description");
 
             Clear();
         }

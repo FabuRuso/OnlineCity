@@ -1069,7 +1069,10 @@ namespace RimWorldOnlineCity
 
                     //переводим всех врагов в нейтральные, кроме людй (Humanlike)
                     var mapPawnsA = new Pawn[GameMap.mapPawns.AllPawnsSpawned.Count];
-                    GameMap.mapPawns.AllPawnsSpawned.CopyTo(mapPawnsA);
+
+                    mapPawnsA = GameMap.mapPawns.AllPawnsSpawned.ToArray();
+                    //GameMap.mapPawns.AllPawnsSpawned.CopyTo(mapPawnsA);
+
                     foreach (var pawn in mapPawnsA)
                     {
                         //Loger.Log($"Client AttackerFinish {pawn.Label} CanHaveFaction {pawn.def.CanHaveFaction}, Humanlike {pawn.RaceProps.Humanlike}, Faction " + (pawn.Faction == null ? "null" : pawn.Faction.Name + " " + pawn.Faction.IsPlayer));
