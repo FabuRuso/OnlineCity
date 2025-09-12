@@ -1,7 +1,7 @@
 # OnlineCity
 OnlineCity mod for RimWorld
 
-This is a fork of this mod, the author of this mod is Vasily Ivanov aka Aant
+This is a fork of OnlineCity, the author of this mod is Vasily Ivanov aka Aant
 
 Link to the original repository — https://github.com/AantCoder/OnlineCity
 
@@ -12,7 +12,7 @@ The goal of the mod is to make it possible to play RimWorld with friends without
 # OnlineCity
 OnlineCity мод для игры RimWorld
 
-Это форк данного мода, автор данного мода — Василий Иванов aka Aant
+Это форк OnlineCity, автор данного мода — Василий Иванов aka Aant
 
 Ссылка на оригинальный репозиторий — https://github.com/AantCoder/OnlineCity
 
