@@ -171,11 +171,6 @@ namespace RimWorldOnlineCity
                     InputDiscord = GUI.TextField(new Rect(rect.x, rect.y, textEditSize.x, textEditSize.y), InputDiscord, 100);
                 });
 
-            var warningMessage = "OCity_WarningMessage".Translate();
-            var warningLabelRect = new Rect(inRect.x + categoryPadding, mainListing.CurHeight + 5f, inRect.width - categoryPadding * 2, textEditSize.y);
-            GUI.color = Color.red;
-            Widgets.Label(warningLabelRect, warningMessage);
-
             if (NeedFockus)
             {
                 NeedFockus = false;

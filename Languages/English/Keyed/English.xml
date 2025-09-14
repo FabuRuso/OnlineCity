@@ -139,6 +139,7 @@ Wealh of exchange: {4}</OCity_Caravan_Other>
 	<OCity_LoginForm_NeedApproveText0>On this server, confirmation in the discord is required. Confirm registration in discord in response to a request from a bot.</OCity_LoginForm_NeedApproveText0>
 	<OC_LoginForm_NeedApproveText1>On this server, confirmation in the discord is required. Enter your discord name, register here, and then confirm your discord registration when prompted by the bot.</OC_LoginForm_NeedApproveText1>
 	<OCity_LoginForm_Discord>Discord login</OCity_LoginForm_Discord>
+	<OCity_Dialog_Exchenge_Server_Description>Server description</OCity_Dialog_Exchenge_Server_Description>
 
 	<!-- SessionClientController.cs -->
 	<OCity_SessionCC_ConnectionFailTitle>Connection failure</OCity_SessionCC_ConnectionFailTitle>

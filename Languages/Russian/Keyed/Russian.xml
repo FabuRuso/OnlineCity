@@ -139,6 +139,7 @@
 	<OCity_LoginForm_NeedApproveText0>На данном сервере необходимо подтверждение в дискорде. Подтвердите регистрацию в дискорде в ответе на запрос от бота.</OCity_LoginForm_NeedApproveText0>
 	<OC_LoginForm_NeedApproveText1>На данном сервере необходимо подтверждение в дискорде. Укажите своё имя в дискорде, зарегистрируйтесь здесь, а затем подтвердите регистрацию в дискорде в ответе на запрос от бота.</OC_LoginForm_NeedApproveText1>
 	<OCity_LoginForm_Discord>Discord логин</OCity_LoginForm_Discord>
+	<OCity_Dialog_Exchenge_Server_Description>Описание сервера</OCity_Dialog_Exchenge_Server_Description>
 
 	<!-- SessionClientController.cs -->
 	<OCity_SessionCC_ConnectionFailTitle>Соединение не установлено</OCity_SessionCC_ConnectionFailTitle>

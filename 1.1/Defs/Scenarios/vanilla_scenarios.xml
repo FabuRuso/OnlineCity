@@ -1,7 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ScenarioDef Name="OC_Crashlanded">
+<ScenarioDef Name="OC_ScenarioBase" Abstract="True">
+  <scenario>
+    <playerFaction>
+      <def>PlayerFaction</def>
+      <factionDef>PlayerColony</factionDef>
+    </playerFaction>
+    <surfaceLayer>
+      <def>SurfaceLayerFixed</def>
+      <tag>Surface</tag>
+      <layer>Surface</layer>
+      <settingsDef>Surface</settingsDef>
+      <hide>true</hide>
+      <connections>
+        <Orbit MayRequire="Ludeon.RimWorld.Odyssey">
+          <zoomMode>ZoomOut</zoomMode>
+        </Orbit>
+      </connections>
+    </surfaceLayer>
+    <parts>
+      <li MayRequire="Ludeon.RimWorld.Odyssey" Class="ScenPart_PlanetLayer">
+        <def>PlanetLayer</def>
+        <tag>Orbit</tag>
+        <layer>Orbit</layer>
+        <settingsDef>Orbit</settingsDef>
+        <hide>true</hide>
+        <connections>
+          <Surface>
+            <zoomMode>ZoomIn</zoomMode>
+          </Surface>
+        </connections>
+      </li>
+    </parts>
+  </scenario>
+</ScenarioDef>
+
+
+  <ScenarioDef ParentName="OC_ScenarioBase">
     <defName>OC_Crashlanded</defName>
     <label>Crashlanded</label>
     <description>The three of you awake in your cryptosleep sarcophagi to the sound of sirens and ripping metal. You barely get to the escape pods before the ship is torn apart. Some time later, you land on this unknown rimworld.</description>
@@ -132,7 +168,7 @@
     </scenario>
   </ScenarioDef>
 
-  <ScenarioDef>
+  <ScenarioDef ParentName="OC_ScenarioBase">
     <defName>OC_LostTribe</defName>
     <label>Lost Tribe</label>
     <description>Your tribe was destroyed by the great blood machines sent by the gods. Five of you managed to escape. Now, it's time to build up a new home.\n\nNote: Since you'll start poor and lack technology, this is a difficult scenario.</description>
@@ -242,7 +278,7 @@
 
 
 
-  <ScenarioDef>
+  <ScenarioDef ParentName="OC_ScenarioBase">
     <defName>OC_TheRichExplorer</defName>
     <label>The Rich Explorer</label>
     <description>People called you crazy for leaving your glitterworld home, but you always yearned to explore the stars - outside the neurosimulator. Now you're at the end of your long journey in cryptosleep, landing on an unknown rimworld to see what it's like.\n\nNote: Since your starting character will lack some skills, this is an especially difficult scenario in the early game.</description>
@@ -336,7 +372,7 @@
 
 
 
-  <ScenarioDef>
+  <ScenarioDef ParentName="OC_ScenarioBase">
     <defName>OC_NakedBrutality</defName>
     <label>Naked Brutality</label>
     <description>You went under anesthetic for a minor surgery. Now you've awoken in a drop pod crashing into a distant planet. You're naked, alone, and totally unprepared. Can you survive?\n\nWarning: There is nothing fair about this scenario - it is extremely difficult and death can happen for any reason.</description>
