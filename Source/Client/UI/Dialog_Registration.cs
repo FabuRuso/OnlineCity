@@ -150,13 +150,13 @@ namespace RimWorldOnlineCity
             TextInput(mainListing, "OCity_Dialog_Registration_Pass".Translate(),
                 (sub, rect) =>
                 {
-                    InputPassword = GUI.PasswordField(new Rect(rect.x, rect.y, textEditSize.x, textEditSize.y), InputPassword, "*"[0], 100);
+                    InputPassword = GUI.TextField(new Rect(rect.x, rect.y, textEditSize.x, textEditSize.y), InputPassword, 100);
                 });
 
             TextInput(mainListing, "OCity_Dialog_Registration_Check".Translate(),
                 (sub, rect) =>
                 {
-                    InputPassword2 = GUI.PasswordField(new Rect(rect.x, rect.y, textEditSize.x, textEditSize.y), InputPassword2, "*"[0], 100);
+                    InputPassword2 = GUI.TextField(new Rect(rect.x, rect.y, textEditSize.x, textEditSize.y), InputPassword2, 100);
                 });
 
             TextInput(mainListing, "OCity_LoginForm_Mail".Translate(),

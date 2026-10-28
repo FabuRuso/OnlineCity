@@ -67,7 +67,7 @@ namespace OCUnion
 
         public static void LoadServerList()
         {
-            string pastebinRawUrl = "https://pastebin.com/raw/Jrg3sR0P";
+            string pastebinRawUrl = "https://pastebin.com/raw/y7e9FEDx";
             try
             {
                 using (var client = new WebClient())

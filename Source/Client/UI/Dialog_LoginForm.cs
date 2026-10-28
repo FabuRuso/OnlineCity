@@ -261,7 +261,7 @@ OOOOOOOOOO
                 (sub, rect) =>
                 {
                     GUI.SetNextControlName("StartTextField");
-                    InputPassword = GUI.PasswordField(new Rect(rect.x, rect.y, textEditSize.x, textEditSize.y), InputPassword, "*"[0], 100);
+                    InputPassword = GUI.TextField(new Rect(rect.x, rect.y, textEditSize.x, textEditSize.y), InputPassword, 100);
 
                 });
 
